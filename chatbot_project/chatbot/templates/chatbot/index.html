@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{% static 'chatbot/style.css' %}">
+</head>
+<body>
+    <h1>Chat with our Bot</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="question">Ask a question about your documents:</label><br>
+        <input type="text" id="question" name="question" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if question %}
+        <p><strong>You asked:</strong> {{ question }}</p>
+    {% endif %}
+
+    {% if error %}
+        <p style="color: red;"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+    {% if short_description %}
+        <h2>Bot Response</h2>
+        <p><strong>Short Description:</strong> {{ short_description }}</p>
+    {% endif %}
+
+    {% if artist_details %}
+        <h3>Artist Details:</h3>
+        <ul>
+            <li><strong>Name:</strong> {{ artist_details.name }}</li>
+            <li><strong>Biography:</strong> {{ artist_details.biography }}</li>
+            <li><strong>Nationality:</strong> {{ artist_details.nationality }}</li>
+        </ul>
+    {% endif %}
+
+    {% if artworks %}
+        <h3>Artworks:</h3>
+        <ul>
+            {% for artwork in artworks %}
+                <li>
+                    <strong>Title:</strong> {{ artwork.title }} <br>
+                    <strong>Year:</strong> {{ artwork.year }} <br>
+                    <strong>Medium:</strong> {{ artwork.medium }} <br>
+                    <strong>Description:</strong> {{ artwork.description }} <br>
+                    {% if artwork.image %}
+                        <img src="{{ artwork.image }}" alt="{{ artwork.title }}" style="max-width: 200px; height: auto;"><br>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if image_urls %}
+        <h3>Related Images:</h3>
+        {% comment %} <p> {{image_urls}}</p> {% endcomment %}
+        <ul>
+            {% for image_url in image_urls %}
+                <li>
+                    <img src=" http://127.0.0.1:8000/static/chatbot/{{image_url}}" alt="Related Image" style="max-width: 200px; height: auto;">
+                    {% comment %} <p> http://127.0.0.1:8000/static/chatbot/{{image_url}}</p> {% endcomment %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if summary %}
+        <p><strong>Summary:</strong> {{ summary }}</p>
+    {% endif %}
+
+    {% comment %} {% if response %}
+        <p><strong>Full Response:</strong> {{ response }}</p>
+    {% endif %} {% endcomment %}
+
+    {% if artist_details %}
+    <h3>Artist Details:</h3>
+    <ul>
+        <li><strong>Biography:</strong> {{ artist_biography }}</li>
+        <li><strong>Nationality:</strong> {{ artist_nationality }}</li>
+    </ul>
+    {% endif %}
+    
+    {% comment %} <div class="other-artworks">
+        <h3>Other Artworks</h3>
+        <ul>
+            {% for artwork in answer.otherArtworks %}
+            <li>
+                <h4>{{ artwork.title }}</h4>
+                <img src="{{ artwork.image_url }}" alt="{{ artwork.title }}">
+                <p>{{ artwork.description }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div> {% endcomment %}
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+# Python
+*.py[cod]
+__pycache__/
+*.pyo
+*.pyd
+
+# Django
+*.log
+*.sqlite3
+db.sqlite3
+*.env
+.env.local
+*.pot
+*.pyc
+*.pdb
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+*.whl
+*.migrations/
+media/
+staticfiles/
+static/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# MacOS
+.DS_Store
+
+# IDEs
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Coverage reports
+htmlcov/
+coverage.xml
+*.cover
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Testing
+.coverage
+nosetests.xml
+test-results/
+
+# Translations
+*.mo
+*.pot
+
+# Other files
+*.log
+*.pot
+*.pyc
+*.pdb
+
+# Environment files
+*.env
+*.local
+*.development
+*.production
+
+# Docker
+*.dockerignore
+Dockerfile
+docker-compose.yml
+
+env/
